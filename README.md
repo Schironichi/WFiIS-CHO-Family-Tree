@@ -36,6 +36,10 @@ There are also files required to build the application on heroku.
 
 ![remove](https://user-images.githubusercontent.com/57150634/214571759-efd7a434-1314-4287-9b7e-14c15b2d12a3.png)
 
+## Genesis
+
+The project was created for the subject Processing Data in Cloud Computing (Przetwarzanie danych w chmurach obliczeniowych) during the VII semester of studies.
+
 ## Bibliography
 
 - [Corey Schafer's Python Django Tutorial series](https://www.youtube.com/watch?v=UmljXZIypDc&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=1)
