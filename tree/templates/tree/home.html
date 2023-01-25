@@ -1,0 +1,33 @@
+{% extends "tree/base.html" %}
+{% block content %}
+    {% for person in people %}
+    <article class="media content-section">
+        <div class="media-body">
+            <h2><a class="article-title" href="person/{{ person.uid }}/">{{person.name}} {{person.surname}}</a></h2>
+            {% if person.birth %}
+                <p class="article-content">Birthday: {{ person.birth|date:'d-m-Y' }}</p>
+            {% endif %}
+            {% if person.death %}
+                <p class="article-content">Death: {{ person.death|date:'d-m-Y' }}</p>
+            {% endif %}
+            {% for spouse in person.spouse %}
+                <p class="text-secondary">Spouse: <a href='{% url 'person' spouse.uid %}'>{{ spouse.name }} {{spouse.surname}}</a></p>
+            {% endfor %}
+            {% if person.children %}
+                <p class="text-secondary">Children: 
+                {% for child in person.children %}
+                    <br><a href='{% url 'person' child.uid %}'>{{ child.name }} {{child.surname}}</a>
+                {% endfor %}
+                </p>
+            {% endif %}
+            {% if person.parents %}
+                <p class="text-secondary">Parents: 
+                {% for parent in person.parents %}
+                    <br><a href='{% url 'person' parent.uid %}'>{{ parent.name }} {{parent.surname}}</a>
+                {% endfor %}
+                </p>
+            {% endif %}
+        </div>
+    </article>
+    {% endfor %}
+{% endblock content %}

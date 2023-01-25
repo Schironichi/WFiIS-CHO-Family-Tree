@@ -1,0 +1,66 @@
+{% extends "tree/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <div class="media-body">
+                <h2 class="account-heading">{{person.name}} {{person.surname}}</h2>
+                {% if person.birth %}
+                    <p class="text-secondary">Birthday: {{ person.birth|date:'d-m-Y' }}</p>
+                {% endif %}
+                {% if person.death %}
+                    <p class="text-secondary">Death: {{ person.death|date:'d-m-Y' }}</p>
+                {% endif %}
+                {% for spouse in person.spouse %}
+                    <p class="text-secondary">Spouse: <a href='{% url 'person' spouse.uid %}'>{{ spouse.name }} {{spouse.surname}}</a></p>
+                {% endfor %}
+                {% if person.children %}
+                    <p class="text-secondary">Children: 
+                    {% for child in person.children %}
+                        <br><a href='{% url 'person' child.uid %}'>{{ child.name }} {{child.surname}}</a>
+                    {% endfor %}
+                    </p>
+                {% endif %}
+                {% if person.parents %}
+                    <p class="text-secondary">Parents: 
+                    {% for parent in person.parents %}
+                        <br><a href='{% url 'person' parent.uid %}'>{{ parent.name }} {{parent.surname}}</a>
+                    {% endfor %}
+                    </p>
+                {% endif %}
+                {% if siblings %}
+                    <p class="text-secondary">Siblings: 
+                    {% for sibling in siblings %}
+                        <br><a href='{% url 'person' sibling.uid %}'>{{ sibling.name }} {{sibling.surname}}</a>
+                    {% endfor %}
+                    </p>
+                {% endif %}
+                {% if cousins %}
+                    <p class="text-secondary">Cousins: 
+                    {% for cousin in cousins %}
+                        <br><a href='{% url 'person' cousin.uid %}'>{{ cousin.name }} {{cousin.surname}}</a>
+                    {% endfor %}
+                    </p>
+                {% endif %}
+                {% if grandparents %}
+                    <p class="text-secondary">Grandparents: 
+                    {% for grandparent in grandparents %}
+                        <br><a href='{% url 'person' grandparent.uid %}'>{{ grandparent.name }} {{grandparent.surname}}</a>
+                    {% endfor %}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+        <form method='POST'>
+            {% csrf_token %}
+            <fieldset class='form-group'>
+                <legend class='border-bottom mb-4'>Edit Person Information</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class='form-group'>
+                <button class='btn btn-outline-info' type='submit'>Update Information</button>
+                <a class='btn btn-outline-danger' href='{% url 'del-person' person.uid %}'>Remove Profile</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
