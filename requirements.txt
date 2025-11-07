@@ -1,4 +1,4 @@
-Django==4.2.24
+Django==4.2.26
 django-crispy-forms==1.14.0
 django_neomodel==0.0.7
 gunicorn==23.0.0
